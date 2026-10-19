@@ -2,12 +2,16 @@ package practicadospspaoa;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
 public class PracticaDosPSPAOA extends JFrame
 {
-
+    
+    //Creo el array de clientes
+    
+    ArrayList <Cliente> clientes  = new ArrayList<>();
     //Etiquetas para identificar los campos de texto
     private JLabel numeroLabel;
     private JLabel nombreLabel;
@@ -25,7 +29,10 @@ public class PracticaDosPSPAOA extends JFrame
 
     public PracticaDosPSPAOA() {
         super("Doble");
-
+        clientes.add(new Cliente("1","Adrian","18","1500"));
+        clientes.add(new Cliente("2","Fernado","21","1300"));
+        clientes.add(new Cliente("3","Luiza","22","1600"));
+        clientes.add(new Cliente("4","Santi","18","2500"));
         //Lo que pasa si cerramos la ventana (sustituye al WindowListener
         //con windowClosing y System.exit(0) de la versión anterior).
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,7 +105,7 @@ public class PracticaDosPSPAOA extends JFrame
     }
 
     public static void main(String[] args) {
-
+        
         // Toda la interfaz Swing se crea en el hilo de eventos (receta: se hace siempre así).
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
