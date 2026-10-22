@@ -12,6 +12,7 @@ public class PracticaDosPSPAOA extends JFrame
     //Creo el array de clientes
     
     ArrayList <Cliente> clientes  = new ArrayList<>();
+    private int indiceActual = 0; //Indice que controla el cliente actual
     //Etiquetas para identificar los campos de texto
     private JLabel numeroLabel;
     private JLabel nombreLabel;
@@ -53,16 +54,22 @@ public class PracticaDosPSPAOA extends JFrame
         dobleField.setForeground(Color.red);
         
         atrasButton = new JButton("Atras!");
-        atrasButton.addActionListener(new ActionListener() {  // Evento de boton.
+        atrasButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("atras");
+                if (indiceActual > 0) {
+                    indiceActual--;
+                    actualizarVista();
+                }
             }
         });
         
         adelanteButton = new JButton("Avanzar!");
-        adelanteButton.addActionListener(new ActionListener() {  // Evento de boton.
+        adelanteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Adelante");
+                if (indiceActual < clientes.size() - 1) {
+                    indiceActual++;
+                    actualizarVista();
+                }
             }
         });
 
@@ -98,9 +105,11 @@ public class PracticaDosPSPAOA extends JFrame
         contentPane.add(labelPane, BorderLayout.CENTER);
         contentPane.add(fieldPane, BorderLayout.EAST);
         contentPane.add(BotonesPane, BorderLayout.SOUTH);
-
+        
+        actualizarVista();
         setContentPane(contentPane);  //this.setContentPane(contentPane);
           // es set, o sea, machado el contenedor del objeto "Doble", hijo de JFrame
+          
 
     }
 
@@ -120,6 +129,25 @@ public class PracticaDosPSPAOA extends JFrame
                 app.setVisible(true);
             }
         });
+        
     }
+    
+    private void actualizarVista() {
+    // Verificamos que la lista no esté vacía
+    if (clientes.isEmpty()) return;
+
+    // Obtenemos el cliente actual
+    Cliente c = clientes.get(indiceActual);
+
+    // Actualizamos los JTextField con los datos del cliente
+    numeroField.setText(c.getNumero());
+    dobleField.setText(c.getNombre()); // Nota: Asegúrate de que el campo de nombre sea nombreField en lugar de dobleField si corresponde
+    edadField.setText(c.getEdad());
+    puntosField.setText(c.getPuntos());
+
+    // Actualizamos el estado de los botones según los límites
+    atrasButton.setEnabled(indiceActual > 0);
+    adelanteButton.setEnabled(indiceActual < clientes.size() - 1);
+}
 
 }
