@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class PracticaDosPSPAOA extends JFrame
 {
-    
+    //Soy una prueba de commit
     //Creo el array de clientes
     
     ArrayList <Cliente> clientes  = new ArrayList<>();
